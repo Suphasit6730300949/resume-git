@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Vance // Senior Software Engineer & Systems Architect</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            bg: '#0a0b10',
+                            card: '#121520',
+                            border: '#1f293d',
+                            cyan: '#00f2fe',
+                            green: '#10b981',
+                            purple: '#a855f7',
+                            pink: '#ec4899',
+                            muted: '#94a3b8'
+                        }
+                    },
+                    fontFamily: {
+                        mono: ['Fira Code', 'JetBrains Mono', 'Courier New', 'monospace'],
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'neon-cyan': '0 0 20px rgba(0, 242, 254, 0.25)',
+                        'neon-green': '0 0 20px rgba(16, 185, 129, 0.25)',
+                        'neon-purple': '0 0 20px rgba(168, 85, 247, 0.25)',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Tech Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0b10;
+            color: #f8fafc;
+        }
+        .font-mono {
+            font-family: 'Fira Code', monospace;
+        }
+        .glass-panel {
+            background: rgba(18, 21, 32, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-panel:hover {
+            border-color: rgba(0, 242, 254, 0.3);
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.1);
+        }
+        .cyber-grid {
+            background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0b10;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f293d;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+        @media print {
+            body {
+                background-color: #ffffff !important;
+                color: #0f172a !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .glass-panel {
+                background: #f8fafc !important;
+                border: 1px solid #cbd5e1 !important;
+                box-shadow: none !important;
+            }
+            .text-cyber-cyan { color: #0284c7 !important; }
+            .text-cyber-green { color: #059669 !important; }
+            .text-cyber-purple { color: #7c3aed !important; }
+        }
+    </style>
+</head>
+<body class="cyber-grid min-h-screen relative selection:bg-cyan-500 selection:text-black">
+
+    <!-- Top Action Bar (No-Print) -->
+    <div class="no-print fixed top-4 right-4 z-50 flex items-center gap-3">
+        <button onclick="window.print()" class="glass-panel px-4 py-2 rounded-xl text-sm font-mono flex items-center gap-2 text-cyber-cyan hover:bg-cyan-500/10 transition-all shadow-neon-cyan">
+            <i class="fa-solid fa-download"></i> EXPORT_PDF
+        </button>
+        <button onclick="toggleMatrixTheme()" id="themeBtn" class="glass-panel px-4 py-2 rounded-xl text-sm font-mono flex items-center gap-2 text-cyber-green hover:bg-emerald-500/10 transition-all shadow-neon-green">
+            <i class="fa-solid fa-terminal"></i> <span id="themeText">MATRIX_MODE</span>
+        </button>
+    </div>
+
+    <main class="max-w-6xl mx-auto px-4 py-12 md:py-16">
+        
+        <!-- Header / Hero Section -->
+        <header class="glass-panel rounded-3xl p-6 md:p-10 mb-8 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 relative z-10">
+                <div class="flex items-center gap-6">
+                    <!-- Avatar with Glowing Border -->
+                    <div class="relative group">
+                        <div class="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+                        <div class="relative w-24 h-24 md:w-28 md:h-28 rounded-2xl bg-cyber-card overflow-hidden flex items-center justify-center border border-cyber-border">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="Alex Vance" class="w-full h-full object-cover filter grayscale contrast-125 hover:grayscale-0 transition-all duration-300" onerror="this.src='https://placehold.co/300x300/121520/00f2fe?text=AV'">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="inline-block w-2 h-2 rounded-full bg-cyber-green animate-ping"></span>
+                            <span class="text-xs font-mono text-cyber-green tracking-wider uppercase">AVAILABLE FOR HIRE</span>
+                        </div>
+                        <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-white mb-1">
+                            ALEX VANCE <span class="text-cyber-cyan font-light">, B.Sc.</span>
+                        </h1>
+                        <p class="text-cyber-muted font-mono text-sm md:text-base flex items-center gap-2">
+                            <span>// Senior Software Engineer</span>
+                            <span class="text-cyber-border">|</span>
+                            <span class="text-cyber-purple">Distributed Systems</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Contact Info Grid -->
+                <div class="flex flex-col gap-2 font-mono text-xs md:text-sm text-slate-300 bg-cyber-bg/50 p-4 rounded-2xl border border-cyber-border w-full md:w-auto">
+                    <a href="mailto:alex.vance.dev@nexus.io" class="flex items-center gap-3 hover:text-cyber-cyan transition-colors">
+                        <i class="fa-solid fa-envelope text-cyber-cyan w-4"></i> alex.vance.dev@nexus.io
+                    </a>
+                    <a href="https://github.com" target="_blank" class="flex items-center gap-3 hover:text-cyber-green transition-colors">
+                        <i class="fa-brands fa-github text-cyber-green w-4"></i> github.com/alexvance-core
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" class="flex items-center gap-3 hover:text-cyber-purple transition-colors">
+                        <i class="fa-brands fa-linkedin text-cyber-purple w-4"></i> linkedin.com/in/alexvance-eng
+                    </a>
+                    <div class="flex items-center gap-3 text-slate-400">
+                        <i class="fa-solid fa-location-dot text-cyber-pink w-4"></i> Bangkok, Thailand (Remote)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Terminal Intro -->
+            <div class="mt-8 bg-black/60 rounded-xl p-4 border border-cyber-border font-mono text-xs md:text-sm">
+                <div class="flex items-center justify-between pb-2 mb-2 border-b border-cyber-border/50 text-slate-500">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-green-500/80 inline-block"></span>
+                        <span class="ml-2 text-slate-400">nexus-shell - bash - 80x24</span>
+                    </div>
+                    <span class="text-cyber-cyan">root@alex-vance:~</span>
+                </div>
+                <div class="text-slate-300 space-y-1">
+                    <p><span class="text-cyber-green">guest@nexus:~$</span> ./load_profile.sh --bio</p>
+                    <p class="text-slate-400 pl-4">"Architecting high-throughput microservices, real-time data streaming pipelines, and bulletproof backend infrastructure with 7+ years of industry experience. Obsessed with clean code, low latency, and robust distributed systems."</p>
+                    <p class="pt-2"><span class="text-cyber-green">guest@nexus:~$</span> <span class="animate-pulse">_</span></p>
+                </div>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Left Column: Experience & Projects (2 columns wide) -->
+            <div class="lg:col-span-2 space-y-8">
+                
+                <!-- Work Experience Section -->
+                <section class="glass-panel rounded-3xl p-6 md:p-8">
+                    <h2 class="text-xl font-bold font-mono text-white mb-6 flex items-center gap-3">
+                        <i class="fa-solid fa-code-branch text-cyber-cyan"></i>
+                        <span>PROFESSIONAL_EXPERIENCE</span>
+                    </h2>
+
+                    <div class="space-y-8 border-l-2 border-cyber-border ml-3 pl-6 relative">
+                        
+                        <!-- Experience Item 1 -->
+                        <div class="relative group">
+                            <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-cyber-bg border-2 border-cyber-cyan group-hover:bg-cyber-cyan transition-colors"></div>
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
+                                <h3 class="text-lg font-bold text-white">Senior Backend Engineer</h3>
+                                <span class="text-xs font-mono px-3 py-1 rounded-full bg-cyber-cyan/10 text-cyber-cyan border border-cyber-cyan/20 w-max">2022 - PRESENT</span>
+                            </div>
+                            <p class="text-sm font-mono text-cyber-purple mb-3">HyperScale Cloud Solutions // Bangkok</p>
+                            <ul class="text-sm text-slate-300 space-y-2 list-disc list-inside">
+                                <li class="leading-relaxed">Architected multi-region event-driven microservices using <span class="text-cyber-cyan font-mono">Go, Kafka, and Kubernetes</span>, scaling to handle 100k+ req/sec.</li>
+                                <li class="leading-relaxed">Optimized PostgreSQL query execution plans and Redis caching strategies, reducing DB load by 40% and cutting API latency from 240ms to 45ms.</li>
+                                <li class="leading-relaxed">Mentored a team of 6 junior and mid-level developers, establishing strict CI/CD security pipelines and automated testing standards.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Experience Item 2 -->
+                        <div class="relative group">
+                            <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-cyber-bg border-2 border-cyber-green group-hover:bg-cyber-green transition-colors"></div>
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
+                                <h3 class="text-lg font-bold text-white">Full Stack Software Engineer</h3>
+                                <span class="text-xs font-mono px-3 py-1 rounded-full bg-cyber-green/10 text-cyber-green border border-cyber-green/20 w-max">2020 - 2022</span>
+                            </div>
+                            <p class="text-sm font-mono text-cyber-green mb-3">CyberPulse Tech Labs // Singapore (Remote)</p>
+                            <ul class="text-sm text-slate-300 space-y-2 list-disc list-inside">
+                                <li class="leading-relaxed">Developed real-time analytics dashboards utilizing <span class="text-cyber-cyan font-mono">React, TypeScript, and Node.js (NestJS)</span> with WebSocket stream integration.</li>
+                                <li class="leading-relaxed">Containerized legacy monolith applications with Docker and deployed automated orchestration onto AWS ECS.</li>
+                                <li class="leading-relaxed">Collaborated with UX/UI teams to build an accessible, highly customizable design system used across 5 enterprise SaaS products.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Experience Item 3 -->
+                        <div class="relative group">
+                            <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-cyber-bg border-2 border-cyber-purple group-hover:bg-cyber-purple transition-colors"></div>
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
+                                <h3 class="text-lg font-bold text-white">Junior Software Developer</h3>
+                                <span class="text-xs font-mono px-3 py-1 rounded-full bg-cyber-purple/10 text-cyber-purple border border-cyber-purple/20 w-max">2018 - 2020</span>
+                            </div>
+                            <p class="text-sm font-mono text-cyber-pink mb-3">NextGen Innovations // Bangkok</p>
+                            <ul class="text-sm text-slate-300 space-y-2 list-disc list-inside">
+                                <li class="leading-relaxed">Built RESTful APIs and integrated secure third-party payment gateways (Stripe, Omise) for high-traffic e-commerce platforms.</li>
+                                <li class="leading-relaxed">Wrote comprehensive unit and integration tests using Jest and PyTest, maintaining 85%+ code coverage.</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Project Portfolio Section -->
+                <section class="glass-panel rounded-3xl p-6 md:p-8">
+                    <h2 class="text-xl font-bold font-mono text-white mb-6 flex items-center gap-3">
+                        <i class="fa-solid fa-layer-group text-cyber-green"></i>
+                        <span>FEATURED_PROJECTS</span>
+                    </h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <!-- Project 1 -->
+                        <div class="bg-cyber-bg/60 rounded-2xl p-5 border border-cyber-border hover:border-cyber-cyan/50 transition-all flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <h3 class="font-bold text-white text-base">AegisGuard Mesh</h3>
+                                    <div class="flex gap-2 text-cyber-cyan">
+                                        <a href="https://github.com" target="_blank" class="hover:text-white transition-colors"><i class="fa-brands fa-github"></i></a>
+                                        <a href="https://github.com" target="_blank" class="hover:text-white transition-colors"><i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></a>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-slate-300 mb-4 leading-relaxed">
+                                    Zero-trust service mesh proxy written in Go with integrated JWT authentication and rate-limiting middleware.
+                                </p>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5 font-mono text-[10px]">
+                                <span class="px-2 py-0.5 rounded bg-cyan-500/10 text-cyber-cyan border border-cyan-500/20">Go</span>
+                                <span class="px-2 py-0.5 rounded bg-purple-500/10 text-cyber-purple border border-purple-500/20">Docker</span>
+                                <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-cyber-green border border-emerald-500/20">gRPC</span>
+                            </div>
+                        </div>
+
+                        <!-- Project 2 -->
+                        <div class="bg-cyber-bg/60 rounded-2xl p-5 border border-cyber-border hover:border-cyber-green/50 transition-all flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <h3 class="font-bold text-white text-base">QuantumFlow CI/CD</h3>
+                                    <div class="flex gap-2 text-cyber-green">
+                                        <a href="https://github.com" target="_blank" class="hover:text-white transition-colors"><i class="fa-brands fa-github"></i></a>
+                                        <a href="https://github.com" target="_blank" class="hover:text-white transition-colors"><i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></a>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-slate-300 mb-4 leading-relaxed">
+                                    Lightweight CLI tool for automated container deployment and multi-cluster Kubernetes health monitoring.
+                                </p>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5 font-mono text-[10px]">
+                                <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-cyber-green border border-emerald-500/20">TypeScript</span>
+                                <span class="px-2 py-0.5 rounded bg-cyan-500/10 text-cyber-cyan border border-cyan-500/20">Kubernetes</span>
+                                <span class="px-2 py-0.5 rounded bg-pink-500/10 text-cyber-pink border border-pink-500/20">Node.js</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Right Column: Skills, Education & Certifications (1 column wide) -->
+            <div class="space-y-8">
+                
+                <!-- Skills Section with Level Bars -->
+                <section class="glass-panel rounded-3xl p-6 md:p-8">
+                    <h2 class="text-xl font-bold font-mono text-white mb-6 flex items-center gap-3">
+                        <i class="fa-solid fa-microchip text-cyber-purple"></i>
+                        <span>TECH_STACK</span>
+                    </h2>
+
+                    <div class="space-y-5 font-mono text-xs">
+                        
+                        <!-- Skill 1 -->
+                        <div>
+                            <div class="flex justify-between mb-1.5 text-slate-300">
+                                <span>Go / Golang</span>
+                                <span class="text-cyber-cyan">95%</span>
+                            </div>
+                            <div class="w-full bg-cyber-bg h-2 rounded-full overflow-hidden border border-cyber-border">
+                                <div class="bg-gradient-to-r from-cyan-500 to-blue-500 h-full rounded-full w-[95%] shadow-neon-cyan"></div>
+                            </div>
+                        </div>
+
+                        <!-- Skill 2 -->
+                        <div>
+                            <div class="flex justify-between mb-1.5 text-slate-300">
+                                <span>TypeScript / Node.js</span>
+                                <span class="text-cyber-green">90%</span>
+                            </div>
+                            <div class="w-full bg-cyber-bg h-2 rounded-full overflow-hidden border border-cyber-border">
+                                <div class="bg-gradient-to-r from-emerald-400 to-green-500 h-full rounded-full w-[90%] shadow-neon-green"></div>
+                            </div>
+                        </div>
+
+                        <!-- Skill 3 -->
+                        <div>
+                            <div class="flex justify-between mb-1.5 text-slate-300">
+                                <span>Python / FastAPI</span>
+                                <span class="text-cyber-purple">85%</span>
+                            </div>
+                            <div class="w-full bg-cyber-bg h-2 rounded-full overflow-hidden border border-cyber-border">
+                                <div class="bg-gradient-to-r from-purple-500 to-indigo-500 h-full rounded-full w-[85%] shadow-neon-purple"></div>
+                            </div>
+                        </div>
+
+                        <!-- Skill 4 -->
+                        <div>
+                            <div class="flex justify-between mb-1.5 text-slate-300">
+                                <span>Docker & Kubernetes</span>
+                                <span class="text-cyber-cyan">88%</span>
+                            </div>
+                            <div class="w-full bg-cyber-bg h-2 rounded-full overflow-hidden border border-cyber-border">
+                                <div class="bg-gradient-to-r from-cyan-400 to-teal-500 h-full rounded-full w-[88%]"></div>
+                            </div>
+                        </div>
+
+                        <!-- Skill 5 -->
+                        <div>
+                            <div class="flex justify-between mb-1.5 text-slate-300">
+                                <span>PostgreSQL & Redis</span>
+                                <span class="text-cyber-green">92%</span>
+                            </div>
+                            <div class="w-full bg-cyber-bg h-2 rounded-full overflow-hidden border border-cyber-border">
+                                <div class="bg-gradient-to-r from-green-400 to-emerald-600 h-full rounded-full w-[92%]"></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Additional Technologies Tag Cloud -->
+                    <div class="mt-6 pt-6 border-t border-cyber-border">
+                        <h3 class="text-xs font-mono text-slate-400 mb-3 uppercase tracking-wider">Other Tools & Frameworks</h3>
+                        <div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+                            <span class="px-2.5 py-1 rounded-lg bg-cyber-bg border border-cyber-border text-slate-300">React</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-cyber-bg border border-cyber-border text-slate-300">GraphQL</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-cyber-bg border border-cyber-border text-slate-300">Kafka</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-cyber-bg border border-cyber-border text-slate-300">AWS</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-cyber-bg border border-cyber-border text-slate-300">CI/CD</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-cyber-bg border border-cyber-border text-slate-300">Linux</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-cyber-bg border border-cyber-border text-slate-300">Terraform</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Education Section -->
+                <section class="glass-panel rounded-3xl p-6 md:p-8">
+                    <h2 class="text-xl font-bold font-mono text-white mb-6 flex items-center gap-3">
+                        <i class="fa-solid fa-graduation-cap text-cyber-cyan"></i>
+                        <span>EDUCATION</span>
+                    </h2>
+
+                    <div class="space-y-4">
+                        <div class="border-l-2 border-cyber-cyan pl-4 py-0.5">
+                            <h3 class="font-bold text-white text-sm">B.Sc. in Computer Science</h3>
+                            <p class="text-xs font-mono text-cyber-cyan">King Mongkut's University of Technology Thonburi</p>
+                            <p class="text-[11px] font-mono text-slate-400 mt-1">2014 - 2018 // GPA: 3.65 / First Class Honors</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Certifications Section -->
+                <section class="glass-panel rounded-3xl p-6 md:p-8">
+                    <h2 class="text-xl font-bold font-mono text-white mb-6 flex items-center gap-3">
+                        <i class="fa-solid fa-certificate text-cyber-green"></i>
+                        <span>CERTIFICATIONS</span>
+                    </h2>
+
+                    <div class="space-y-3 font-mono text-xs">
+                        <div class="bg-cyber-bg/50 p-3 rounded-xl border border-cyber-border flex items-center justify-between">
+                            <span class="text-slate-200">AWS Certified Solutions Architect</span>
+                            <span class="text-cyber-cyan text-[10px]">2024</span>
+                        </div>
+                        <div class="bg-cyber-bg/50 p-3 rounded-xl border border-cyber-border flex items-center justify-between">
+                            <span class="text-slate-200">Certified Kubernetes Administrator (CKA)</span>
+                            <span class="text-cyber-green text-[10px]">2023</span>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-12 text-center font-mono text-xs text-slate-500 py-6 border-t border-cyber-border">
+            <p>DESIGNED & BUILT BY ALEX VANCE // SECURE CONNECTION ESTABLISHED</p>
+        </footer>
+
+    </main>
+
+    <script>
+        function toggleMatrixTheme() {
+            const body = document.body;
+            const themeText = document.getElementById('themeText');
+            
+            if (body.classList.contains('matrix-theme')) {
+                body.classList.remove('matrix-theme');
+                body.style.backgroundColor = '#0a0b10';
+                themeText.innerText = 'MATRIX_MODE';
+            } else {
+                body.classList.add('matrix-theme');
+                body.style.backgroundColor = '#020d08';
+                themeText.innerText = 'CYBER_MODE';
+            }
+        }
+    </script>
+</body>
+</html>
